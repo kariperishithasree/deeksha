@@ -1,47 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logoTextImg from '../assets/logo-text.png';
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setIsSubscribed(true);
-      setEmail('');
-      setTimeout(() => setIsSubscribed(false), 5000);
-    }
-  };
 
   return (
     <footer className="site-footer">
       <div className="container">
-        {/* Newsletter Section */}
-        <div className="footer-newsletter">
-          <div className="newsletter-text">
-            <h2>Join the Slow Fashion Movement</h2>
-            <p>Subscribe to receive stories of our weavers, early access to new collections, and seasonal style edits.</p>
-          </div>
-          <form onSubmit={handleSubscribe} className="newsletter-form">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <button type="submit" className="btn btn-primary">Subscribe</button>
-            {isSubscribed && (
-              <span className="newsletter-success animate-fade-in">
-                Thank you! You have successfully subscribed to Deeksha.
-              </span>
-            )}
-          </form>
-        </div>
 
-        <div className="footer-divider"></div>
 
         {/* Links Grid */}
         <div className="footer-grid">
@@ -50,7 +16,11 @@ export default function Footer() {
               <img src={logoTextImg} alt="Deeksha" className="footer-logo-image" />
             </div>
             <p className="brand-philosophy">
-              Every thread celebrates the hands that create and the women who wear it. We collaborate directly with rural Indian handloom weavers and embroidery artisans to construct premium, high-aesthetic women's pieces that preserve heritage craft and support local economies.
+              Thank you for visiting Deeksha.<br /><br />
+              We hope you leave with more than just a garment—we hope you carry a piece of India's craftsmanship, the warmth of thoughtful design, and the comfort to wear your heritage every day.<br /><br />
+              From our artisans to your wardrobe, thank you for being part of our story.<br /><br />
+              With love,<br /><br />
+              Team Deeksha ♡
             </p>
             <div className="social-links">
               <a href="https://instagram.com/deeksha.co.in" target="_blank" rel="noopener noreferrer">@deeksha.co.in</a>
@@ -86,7 +56,10 @@ export default function Footer() {
               deekshascouture@gmail.com
             </a>
             <p className="contact-info mt-15">
-              Phone: +91 98765 43210
+              <a href="https://instagram.com/deeksha.co.in" target="_blank" rel="noopener noreferrer">@deeksha.co.in</a>
+            </p>
+            <p className="contact-info">
+              DM us for queries
             </p>
           </div>
         </div>
@@ -323,3 +296,4 @@ export default function Footer() {
     </footer>
   );
 }
+

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
-import { CreditCard, CheckCircle, ArrowLeft, ArrowRight, ShieldCheck } from 'lucide-react';
+import { CreditCard, CheckCircle, ArrowLeft, ArrowRight, ShieldCheck, MessageSquare } from 'lucide-react';
 
 export default function Checkout() {
   const { cartItems, cartTotal, clearCart } = useCart();
@@ -27,6 +27,7 @@ export default function Checkout() {
   });
 
   const [shippingMethod, setShippingMethod] = useState('standard');
+  const [paymentMethod, setPaymentMethod] = useState('whatsapp');
   const shippingCost = shippingMethod === 'express' ? 350 : (cartTotal >= 6000 ? 0 : 150);
   const finalTotal = cartTotal + shippingCost;
 
@@ -39,6 +40,63 @@ export default function Checkout() {
     e.preventDefault();
     setStep(3);
     clearCart(); // Clear cart globally upon successful checkout simulation
+  };
+
+  const handlePaymentFormSubmit = (e) => {
+    e.preventDefault();
+    if (paymentMethod === 'whatsapp') {
+      handleWhatsAppCheckout(e);
+    } else {
+      handlePaymentSubmit(e);
+    }
+  };
+
+  const handleWhatsAppCheckout = (e) => {
+    if (e) e.preventDefault();
+    
+    // Construct pre-filled order message
+    const formattedItems = cartItems.map(item => {
+      let itemStr = `• *${item.product.name}*\n  Size: ${item.size} | Qty: ${item.quantity} | Price: ₹${(item.product.price * item.quantity).toLocaleString('en-IN')}`;
+      if (item.metadata?.height) {
+        itemStr += `\n  Height: ${item.metadata.height}`;
+      }
+      if (item.metadata?.measurements && Object.keys(item.metadata.measurements).length > 0) {
+        itemStr += `\n  Custom Measurements:`;
+        Object.entries(item.metadata.measurements).forEach(([key, val]) => {
+          const prettyKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase());
+          itemStr += `\n    - ${prettyKey}: ${val}`;
+        });
+      }
+      return itemStr;
+    }).join('\n\n');
+
+    const message = `Namaste Deeksha! I would like to place an order.
+
+*Order Details:*
+${formattedItems}
+
+*Customer Details:*
+• Name: ${shippingForm.firstName} ${shippingForm.lastName}
+• Email: ${shippingForm.email}
+• Phone: ${shippingForm.phone}
+• Address: ${shippingForm.address}, ${shippingForm.city}, ${shippingForm.state} - ${shippingForm.postalCode}
+
+*Shipping Method:* ${shippingMethod === 'express' ? 'Express Tailoring Delivery (8-10 days)' : 'Standard Shipping (12-15 days)'}
+*Shipping Cost:* ${shippingCost === 0 ? 'FREE' : `₹${shippingCost}`}
+*Total Amount:* ₹${finalTotal.toLocaleString('en-IN')}
+
+Please share UPI/payment details to finalize my order. Thank you!`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappNumber = '917095999409'; // Deeksha WhatsApp Business Number
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+
+    // Advance to Success screen
+    setStep(3);
+    clearCart();
   };
 
   if (cartItems.length === 0 && step !== 3) {
@@ -171,7 +229,7 @@ export default function Checkout() {
                       />
                       <div className="method-info">
                         <span className="method-title">Standard Shipping</span>
-                        <span className="method-time">3-5 business days</span>
+                        <span className="method-time">12-15 business days</span>
                       </div>
                       <span className="method-price">
                         {cartTotal >= 6000 ? 'FREE' : '₹150'}
@@ -188,7 +246,7 @@ export default function Checkout() {
                       />
                       <div className="method-info">
                         <span className="method-title">Express Tailoring Delivery</span>
-                        <span className="method-time">1-2 business days</span>
+                        <span className="method-time">8-10 business days</span>
                       </div>
                       <span className="method-price">₹350</span>
                     </label>
@@ -207,59 +265,23 @@ export default function Checkout() {
             )}
 
             {step === 2 && (
-              <form onSubmit={handlePaymentSubmit} className="checkout-step-form">
-                <h2>Payment Information</h2>
-                <div className="payment-security-badge">
-                  <ShieldCheck size={18} />
-                  <span>Secure 256-bit encrypted simulated environment</span>
-                </div>
-                
-                <div className="form-grid">
-                  <div className="input-group col-span-2">
-                    <label htmlFor="cardName">Cardholder Name</label>
-                    <input 
-                      type="text" 
-                      id="cardName"
-                      value={paymentForm.cardName}
-                      onChange={(e) => setPaymentForm({ ...paymentForm, cardName: e.target.value })}
-                      required 
-                    />
-                  </div>
-                  <div className="input-group col-span-2">
-                    <label htmlFor="cardNumber">Card Number</label>
-                    <input 
-                      type="text" 
-                      id="cardNumber"
-                      placeholder="1234 5678 9101 1121"
-                      value={paymentForm.cardNumber}
-                      onChange={(e) => setPaymentForm({ ...paymentForm, cardNumber: e.target.value })}
-                      maxLength="19"
-                      required 
-                    />
-                  </div>
-                  <div className="input-group">
-                    <label htmlFor="expiry">Expiry Date</label>
-                    <input 
-                      type="text" 
-                      id="expiry"
-                      placeholder="MM/YY"
-                      value={paymentForm.expiry}
-                      onChange={(e) => setPaymentForm({ ...paymentForm, expiry: e.target.value })}
-                      maxLength="5"
-                      required 
-                    />
-                  </div>
-                  <div className="input-group">
-                    <label htmlFor="cvv">CVV</label>
-                    <input 
-                      type="password" 
-                      id="cvv"
-                      placeholder="***"
-                      value={paymentForm.cvv}
-                      onChange={(e) => setPaymentForm({ ...paymentForm, cvv: e.target.value })}
-                      maxLength="3"
-                      required 
-                    />
+              <form onSubmit={handleWhatsAppCheckout} className="checkout-step-form">
+                <h2>Order Summary & WhatsApp Redirection</h2>
+
+                <div className="whatsapp-info-box" style={{ padding: '20px', border: '1px solid var(--primary)', backgroundColor: '#FAF6F0', marginBottom: '30px' }}>
+                  <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <MessageSquare size={24} style={{ color: '#25D366', flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <h4 style={{ margin: '0 0 8px 0', fontSize: '1.1rem', color: 'var(--text-dark)' }}>Finalize your Order on WhatsApp</h4>
+                      <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.5' }}>
+                        To complete your order, we will redirect you to WhatsApp with a pre-formatted message containing your selected items, sizes, custom measurements, and shipping details.
+                      </p>
+                      <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                        <li>We'll review your sizes and custom measurements directly on chat.</li>
+                        <li>We will share the UPI payment details to secure your slot.</li>
+                        <li>Stitch queue position is assigned once payment is confirmed.</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
@@ -267,8 +289,8 @@ export default function Checkout() {
                   <button type="button" className="btn btn-secondary back-btn" onClick={() => setStep(1)}>
                     <ArrowLeft size={16} style={{ marginRight: '8px' }} /> Return to Shipping
                   </button>
-                  <button type="submit" className="btn btn-primary next-btn">
-                    Place Devoted Order <CreditCard size={16} style={{ marginLeft: '8px' }} />
+                  <button type="submit" className="btn btn-primary next-btn" style={{ backgroundColor: '#25D366', borderColor: '#25D366', color: '#fff' }}>
+                    Redirect to WhatsApp Chat <MessageSquare size={16} style={{ marginLeft: '8px' }} />
                   </button>
                 </div>
               </form>

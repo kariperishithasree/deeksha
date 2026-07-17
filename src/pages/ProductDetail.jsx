@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { products, customManagementNote } from '../data/products';
 import { useCart } from '../context/CartContext';
@@ -401,155 +401,177 @@ export default function ProductDetail() {
             {customMeasurements && (
               <div className="measurements-grid">
                 <div className="measure-input">
-                  <label>Shoulder Length</label>
+                  <label>Shoulder Length (in)</label>
                   <input
+                    placeholder="e.g. 14"
                     value={measurements.shoulderLength}
                     onChange={(e) => setMeasurements({ ...measurements, shoulderLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Armhole (Round)</label>
+                  <label>Armhole (Round) (in)</label>
                   <input
+                    placeholder="e.g. 17"
                     value={measurements.armhole}
                     onChange={(e) => setMeasurements({ ...measurements, armhole: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Upper Chest (Round)</label>
+                  <label>Upper Chest (Round) (in)</label>
                   <input
+                    placeholder="e.g. 36"
                     value={measurements.upperChest}
                     onChange={(e) => setMeasurements({ ...measurements, upperChest: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Chest (Round)</label>
+                  <label>Chest (Round) (in)</label>
                   <input
+                    placeholder="e.g. 36"
                     value={measurements.chest}
                     onChange={(e) => setMeasurements({ ...measurements, chest: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Lower Chest (Round)</label>
+                  <label>Lower Chest (Round) (in)</label>
                   <input
+                    placeholder="e.g. 38"
                     value={measurements.lowerChest}
                     onChange={(e) => setMeasurements({ ...measurements, lowerChest: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Point Length</label>
+                  <label>Point Length (in)</label>
                   <input
+                    placeholder="e.g. 21"
                     value={measurements.pointLength}
                     onChange={(e) => setMeasurements({ ...measurements, pointLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Bodice Length</label>
+                  <label>Bodice Length (in)</label>
                   <input
+                    placeholder="e.g. 15"
                     value={measurements.bodiceLength}
                     onChange={(e) => setMeasurements({ ...measurements, bodiceLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Waist (Round)</label>
+                  <label>Waist (Round) (in)</label>
                   <input
+                    placeholder="e.g. 28"
                     value={measurements.waist}
                     onChange={(e) => setMeasurements({ ...measurements, waist: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Tummy</label>
+                  <label>Tummy (in)</label>
                   <input
+                    placeholder="e.g. 30"
                     value={measurements.tummy}
                     onChange={(e) => setMeasurements({ ...measurements, tummy: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Hip (Round)</label>
+                  <label>Hip (Round) (in)</label>
                   <input
+                    placeholder="e.g. 38"
                     value={measurements.hip}
                     onChange={(e) => setMeasurements({ ...measurements, hip: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Sleeves Length</label>
+                  <label>Sleeves Length (in)</label>
                   <input
+                    placeholder="e.g. 23"
                     value={measurements.sleevesLength}
                     onChange={(e) => setMeasurements({ ...measurements, sleevesLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Bicep</label>
+                  <label>Bicep (in)</label>
                   <input
+                    placeholder="e.g. 11"
                     value={measurements.bicep}
                     onChange={(e) => setMeasurements({ ...measurements, bicep: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Elbow Rounding</label>
+                  <label>Elbow Rounding (in)</label>
                   <input
+                    placeholder="e.g. 10"
                     value={measurements.elbowRounding}
                     onChange={(e) => setMeasurements({ ...measurements, elbowRounding: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Front Neck (Length)</label>
+                  <label>Front Neck (Length) (in)</label>
                   <input
+                    placeholder="e.g. 7.5"
                     value={measurements.frontNeckLength}
                     onChange={(e) => setMeasurements({ ...measurements, frontNeckLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Back Neck (Length)</label>
+                  <label>Back Neck (Length) (in)</label>
                   <input
+                    placeholder="e.g. 7.5"
                     value={measurements.backNeckLength}
                     onChange={(e) => setMeasurements({ ...measurements, backNeckLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Dress Length</label>
+                  <label>Dress Length (in)</label>
                   <input
+                    placeholder="e.g. 45"
                     value={measurements.dressLength}
                     onChange={(e) => setMeasurements({ ...measurements, dressLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Crop Top (Length)</label>
+                  <label>Crop Top (Length) (in)</label>
                   <input
+                    placeholder="e.g. 17"
                     value={measurements.cropTopLength}
                     onChange={(e) => setMeasurements({ ...measurements, cropTopLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Crop Top (Round)</label>
+                  <label>Crop Top (Round) (in)</label>
                   <input
+                    placeholder="e.g. 34"
                     value={measurements.cropTopRound}
                     onChange={(e) => setMeasurements({ ...measurements, cropTopRound: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Lehenga Length</label>
+                  <label>Lehenga Length (in)</label>
                   <input
+                    placeholder="e.g. 42"
                     value={measurements.lehengaLength}
                     onChange={(e) => setMeasurements({ ...measurements, lehengaLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Pant Length</label>
+                  <label>Pant Length (in)</label>
                   <input
+                    placeholder="e.g. 40"
                     value={measurements.pantLength}
                     onChange={(e) => setMeasurements({ ...measurements, pantLength: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Thigh</label>
+                  <label>Thigh (in)</label>
                   <input
+                    placeholder="e.g. 22"
                     value={measurements.thigh}
                     onChange={(e) => setMeasurements({ ...measurements, thigh: e.target.value })}
                   />
                 </div>
                 <div className="measure-input">
-                  <label>Ankle</label>
+                  <label>Ankle (in)</label>
                   <input
+                    placeholder="e.g. 8.5"
                     value={measurements.ankle}
                     onChange={(e) => setMeasurements({ ...measurements, ankle: e.target.value })}
                   />

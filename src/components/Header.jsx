@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, Search, Menu, X, User, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import logoImg from '../assets/logo.jpg';
-import logoTextImg from '../assets/logo-text.png';
+import logo from '../assets/logo.png';
 
 export default function Header() {
   const { setIsCartOpen, setIsWishlistOpen, cartCount, wishlistCount } = useCart();
@@ -59,9 +58,7 @@ export default function Header() {
 
           {/* Center Brand */}
           <Link to="/" className="site-logo">
-            <div className="logo-img-container">
-              <img src={logoImg} alt="Deeksha Logo" className="logo-image" />
-            </div>
+            <img src={logo} alt="Deeksha" className="logo-image-combined" />
           </Link>
 
           {/* Right Navigation / Icons */}
@@ -128,7 +125,7 @@ export default function Header() {
           <div className="mobile-menu-overlay animate-fade-in" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="mobile-menu-drawer" onClick={(e) => e.stopPropagation()}>
               <div className="mobile-menu-header">
-                <img src={logoTextImg} alt="Deeksha" className="mobile-menu-logo" />
+                <img src={logo} alt="Deeksha" className="mobile-menu-logo" />
                 <button onClick={() => setIsMobileMenuOpen(false)} className="close-drawer-btn">
                   <X size={24} />
                 </button>
@@ -201,6 +198,9 @@ export default function Header() {
           .desktop-nav {
             display: none !important;
           }
+          .site-logo-text-img {
+            display: none;
+          }
         }
 
         .desktop-nav {
@@ -245,6 +245,18 @@ export default function Header() {
           gap: 12px;
         }
 
+        .logo-image-combined {
+          height: 70px;
+          width: auto;
+          object-fit: contain;
+        }
+
+        .site-logo-text-img {
+          height: 35px;
+          width: auto;
+          object-fit: contain;
+        }
+
         .site-logo-text {
           font-family: var(--font-serif);
           font-size: 1.1rem;
@@ -252,22 +264,6 @@ export default function Header() {
           color: var(--text-dark);
           letter-spacing: 0.12em;
           text-transform: uppercase;
-        }
-
-        .logo-img-container {
-          height: 60px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-        }
-
-        .logo-image {
-          height: 160%; /* Scales slightly to crop empty borders of paper template */
-          width: auto;
-          object-fit: contain;
-          mix-blend-mode: multiply;
-          filter: contrast(1.15) brightness(1.02);
         }
 
         .header-icons {
@@ -409,13 +405,9 @@ export default function Header() {
         }
 
         .mobile-menu-logo {
-          width: 150px;
+          width: 120px;
           height: auto;
-          margin-top: -20px;
-          margin-bottom: -15px;
-          margin-left: -15px;
           object-fit: contain;
-          mix-blend-mode: multiply;
         }
 
         .close-drawer-btn {

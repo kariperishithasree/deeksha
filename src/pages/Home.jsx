@@ -4,18 +4,20 @@ import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
 import { ArrowRight, Compass, Heart, Shield } from 'lucide-react';
 import heroImg1 from '../assets/nishitha (black pattu).jpeg';
-import heroImg2 from '../assets/neelambari(light blue jute).png';
-import heroImg3 from '../assets/terracotta_sunrise.png';
+import heroImg2 from '../assets/madhavi (maroon pattu).png';
+import heroImg3 from '../assets/chitralekha (pattu kalamkari).jpeg';
+import heroImg4 from '../assets/lalitha (pink mirror).jpeg';
+import heroImg5 from '../assets/neelambari(light blue jute).png';
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
   const slides = [
     {
       image: heroImg1,
-      tag: "THE INAUGURAL COLLECTION",
-      title: "Chanderi Dreams",
-      description: "Sheer handloom silk blended with organic cotton, adorned with delicate botanical hand-embroidery.",
-      link: "/shop?fabric=Chanderi"
+      tag: "PURE MANGALGIRI COTTON",
+      title: "Nishitha Heritage",
+      description: "A timeless black tiered dress accented with elegant gold detailing, designed to bring effortless grace, all-day comfort, and understated sophistication.",
+      link: "/shop?fabric=Pure%20Mangalgiri%20Cotton"
     },
     {
       image: heroImg2,
@@ -26,17 +28,24 @@ export default function Home() {
     },
     {
       image: heroImg3,
-      tag: "ORGANIC INDIGO EDITS",
-      title: "Deep Indigo Meadows",
-      description: "Naturally dyed in Rajasthan, featuring white sashiko thread work and practical pockets.",
-      link: "/shop?fabric=Cotton"
+      tag: "PURE PATTU AND MILK KALAMKARI",
+      title: "Chitralekha Heritage",
+      description: "A graceful pattu dress with milk kalamkari floral motifs, designed to bring effortless elegance and timeless charm.",
+      link: "/shop?fabric=Pure%20Pattu%20and%20Milk%20Kalamkari"
     },
     {
-      image: heroImg3,
-      tag: "FLAX LINEN DRESSES",
-      title: "Terracotta Sunrise",
-      description: "Puff sleeve silhouettes in heritage flax linen, embroidered with vibrant wildflower vines.",
-      link: "/shop?fabric=Linen"
+      image: heroImg4,
+      tag: "PURE LINEN COTTON",
+      title: "Lalitha Everyday",
+      description: "A rose-hued midi dress with graceful gathers and a flowing silhouette, designed to bring effortless comfort, feminine charm, and everyday elegance.",
+      link: "/shop?fabric=pure%20linen%20cotton"
+    },
+    {
+      image: heroImg5,
+      tag: "JUTE",
+      title: "Neelambari Everyday",
+      description: "A graceful teal dress adorned with vibrant floral embroidery, inspired by blooming meadows and designed for effortless elegance with a fresh, contemporary charm.",
+      link: "/shop?fabric=Jute"
     }
   ];
 
@@ -180,7 +189,7 @@ export default function Home() {
       <section className="artisan-story-section">
         <div className="story-split-grid">
           <div className="story-image-col">
-            <img src={products[5].image} alt="Craftsmanship detail" />
+            <img src={products[4].image} alt="Craftsmanship detail" />
           </div>
           <div className="story-content-col">
             <div className="story-content-box">

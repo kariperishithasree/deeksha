@@ -1,10 +1,8 @@
 import nishithaPattu from '../assets/nishitha (black pattu).jpeg';
 import neelambariJute from '../assets/neelambari(light blue jute).png';
-import terracottaSunrise from '../assets/terracotta_sunrise.png';
-import sageForest from '../assets/sage_forest.png';
+import lalithaPinkMirror from '../assets/lalitha (pink mirror).jpeg';
+import chitralekhaKalamkari from '../assets/chitralekha (pattu kalamkari).jpeg';
 import madhaviMaroonPattu from '../assets/madhavi (maroon pattu).png';
-import alabasterEyelet from '../assets/alabaster_eyelet.png';
-import neelvanaArtwork from '../assets/hero.png';
 
 export const customManagementNote = 'Custom made-to-measure and alteration requests are available for every piece.';
 
@@ -40,32 +38,36 @@ export const products = [
     isBestSeller: true,
   },
   {
-    id: 'terracotta-sunrise',
-    name: 'The Terracotta Sunrise',
-    price: 5200,
-    description: 'A modern shift dress with structural puff sleeves, crafted in heavy hand-loomed flax linen. It features a warm terracotta clay tone and intricate yellow and white wildflower vines hand-embroidered meticulously along the sleeve hems and side slits.',
-    fabric: 'Linen',
-    length: 'Mini',
-    color: 'Terracotta',
+    id: 'lalitha',
+    name: 'లలిత (Lalitha) | गुलरंग (Gulrang)',
+    price: 7599,
+    tagline: 'Rose Glow Midi Dress',
+    description: 'A rose-hued midi dress with graceful gathers and a flowing silhouette, designed to bring effortless comfort, feminine charm, and everyday elegance.',
+    fabric: 'Pure Linen Cotton',
+    length: 'Midi',
+    color: 'Rose',
     sizes: ['XS', 'S', 'M', 'L', 'XXL'],
-    image: terracottaSunrise,
-    secondaryImage: terracottaSunrise,
+    image: lalithaPinkMirror,
+    secondaryImage: lalithaPinkMirror,
     category: 'everyday',
     isBestSeller: true,
+    handwork: 'Mirror Handwork',
   },
   {
-    id: 'sage-forest',
-    name: 'The Sage Forest Maxi',
-    price: 7200,
-    description: 'A flowing, high-waist maxi dress in a soothing sage green tone, woven from fine linen yarn. Designed with adjustable shoulder tie-up straps, a square neck, and tone-on-tone botanical leaf embroidery across the bodice and back panels. Unmatched comfort for warm seasons.',
-    fabric: 'Linen',
+    id: 'chitralekha',
+    name: 'చిత్రలేఖ (Chitralekha) | रंगोली (Rangoli)',
+    price: 8499,
+    tagline: 'Artisan Bloom Dress',
+    description: 'A timeless ivory silhouette elevated with a colourful floral border, inspired by India\'s rich artistic heritage and designed for effortless everyday elegance.',
+    fabric: 'Pure Pattu and Milk Kalamkari',
     length: 'Maxi',
-    color: 'Sage',
+    color: 'Ivory',
     sizes: ['S', 'M', 'L', 'XXL'],
-    image: sageForest,
-    secondaryImage: sageForest,
+    image: chitralekhaKalamkari,
+    secondaryImage: chitralekhaKalamkari,
     category: 'everyday',
     isBestSeller: false,
+    shortDescription: 'A timeless ivory silhouette elevated with a colourful floral border, inspired by India\'s rich artistic heritage and designed for effortless everyday elegance.',
   },
   {
     id: 'madhavi-maroon-pattu',
@@ -81,35 +83,5 @@ export const products = [
     secondaryImage: madhaviMaroonPattu,
     category: 'heritage',
     isBestSeller: false,
-  },
-  {
-    id: 'alabaster-eyelet',
-    name: 'The Alabaster Eyelet',
-    price: 6400,
-    description: 'A pristine white tiered dress crafted in ultra-soft organic cotton mulmul. Features delicate Schiffli eyelet lace panels along the tiers and sleeves, side pockets, and miniature tone-on-tone ivory daisy embroidery sprinkled across the dress.',
-    fabric: 'Mulmul Cotton',
-    length: 'Maxi',
-    color: 'White',
-    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
-    image: alabasterEyelet,
-    secondaryImage: alabasterEyelet,
-    category: 'everyday',
-    isBestSeller: false,
-  }
-  ,
-  {
-    id: 'neelvana',
-    name: 'Neelvana',
-    price: 6499,
-    description: 'Fresh, elegant, and effortlessly comfortable, Neelvana is designed for women who love wearing Indian fashion every day. Featuring a vibrant turquoise hue with delicate floral embroidery along the bodice and hem, this frock blends contemporary silhouettes with timeless Indian artistry. Made for easy, all-day wear, its flowy silhouette and breathable fabric make it a perfect choice for brunches, vacations, festive gatherings, or everyday elegance. Simple, graceful, and thoughtfully designed—Neelvana celebrates the beauty of Indian-inspired fashion in a modern way.',
-    fabric: 'Cotton-Linen Blend',
-    length: 'Midi',
-    color: 'Turquoise Blue',
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    image: neelvanaArtwork,
-    secondaryImage: neelvanaArtwork,
-    category: 'everyday',
-    isBestSeller: false,
-    shortDescription: 'A turquoise floral embroidered piece designed for effortless comfort and everyday elegance.'
   }
 ];

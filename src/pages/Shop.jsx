@@ -13,6 +13,7 @@ export default function Shop() {
   const [selectedFabric, setSelectedFabric] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedHandwork, setSelectedHandwork] = useState('');
 
   const handleFabricChange = (fab) => {
     const nextFabric = selectedFabric === fab ? '' : fab;
@@ -44,12 +45,14 @@ export default function Shop() {
     const filterParam = params.get('filter') || '';
     const categoryParam = params.get('category') || '';
     const sizeParam = params.get('size') || '';
+    const handworkParam = params.get('handwork') || '';
 
     setSelectedLength(lengthParam);
     setSelectedFabric(fabricParam.trim());
     setSelectedSize(sizeParam);
     setSearchFilter(searchParam);
     setSelectedCategory(categoryParam.trim());
+    setSelectedHandwork(handworkParam.trim());
 
     if (filterParam === 'isBestSeller') {
       setSortOption('bestselling');
@@ -65,6 +68,7 @@ export default function Shop() {
     setSelectedSize('');
     setSearchFilter('');
     setSelectedCategory('');
+    setSelectedHandwork('');
     setSortOption('featured');
     navigate(location.pathname, { replace: true });
   };
@@ -94,6 +98,12 @@ export default function Shop() {
       }
       // Filter by Size availability
       if (selectedSize && !product.sizes.includes(selectedSize)) return false;
+      // Filter by Handwork
+      if (selectedHandwork) {
+        const normalizedProductHandwork = (product.handwork || '').toLowerCase();
+        const normalizedSelectedHandwork = selectedHandwork.toLowerCase();
+        if (!normalizedProductHandwork.includes(normalizedSelectedHandwork)) return false;
+      }
       // Filter by Search Query
       if (searchFilter) {
         const query = searchFilter.toLowerCase();
@@ -180,7 +190,7 @@ export default function Shop() {
             <div className="filter-group">
               <h3>Fabric & Weave</h3>
               <div className="filter-options">
-                {['Chanderi', 'Pure Mangalgiri Cotton', 'Jute', 'Linen', 'Cotton'].map((fab) => (
+                {['Pure Mangalgiri Cotton', 'Pure Linen Cotton', 'Pure Pattu', 'Milk Kalamkari', 'Jute'].map((fab) => (
                   <button 
                     key={fab}
                     className={`filter-btn ${selectedFabric === fab ? 'active' : ''}`}
@@ -208,8 +218,24 @@ export default function Shop() {
               </div>
             </div>
 
+            {/* Handwork Filter */}
+            <div className="filter-group">
+              <h3>Handwork</h3>
+              <div className="filter-options">
+                {['Mirror Handwork', 'Embroidery', 'Hand Maggam Work'].map((hw) => (
+                  <button 
+                    key={hw}
+                    className={`filter-btn ${selectedHandwork === hw ? 'active' : ''}`}
+                    onClick={() => setSelectedHandwork(selectedHandwork === hw ? '' : hw)}
+                  >
+                    {hw}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Active Filters list / Clear button */}
-            {(selectedLength || selectedFabric || selectedSize || searchFilter) && (
+            {(selectedLength || selectedFabric || selectedSize || searchFilter || selectedHandwork) && (
               <button className="btn btn-secondary clear-all-btn" onClick={handleClearAll}>
                 Clear All Filters
               </button>
@@ -271,7 +297,7 @@ export default function Shop() {
               <div className="m-filter-section">
                 <h4>Fabric & Weave</h4>
                 <div className="m-options">
-                  {['Chanderi', 'Pure Mangalgiri Cotton', 'Jute', 'Linen', 'Cotton'].map((fab) => (
+                  {['Pure Mangalgiri Cotton', 'Pure Linen Cotton', 'Pure Pattu', 'Milk Kalamkari', 'Jute'].map((fab) => (
                     <button 
                       key={fab}
                       className={`filter-btn ${selectedFabric === fab ? 'active' : ''}`}
@@ -298,6 +324,24 @@ export default function Shop() {
                       }}
                     >
                       {sz}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Handwork */}
+              <div className="m-filter-section">
+                <h4>Handwork</h4>
+                <div className="m-options">
+                  {['Mirror Handwork', 'Embroidery', 'Hand Maggam Work'].map((hw) => (
+                    <button 
+                      key={hw}
+                      className={`filter-btn ${selectedHandwork === hw ? 'active' : ''}`}
+                      onClick={() => {
+                        setSelectedHandwork(selectedHandwork === hw ? '' : hw);
+                      }}
+                    >
+                      {hw}
                     </button>
                   ))}
                 </div>
