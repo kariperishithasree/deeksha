@@ -104,7 +104,7 @@ export default function Header() {
                 placeholder="Search for pieces (Linen, Chanderi, Mini...)" 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                autoFocus
+                
               />
               <button type="submit" className="search-submit-btn">
                 <Search size={18} />
